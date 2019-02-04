@@ -7,6 +7,6 @@
 
     }
     var oo = new Identite('pons', 'olivier');
-    console.log(oo.nomcompleté);
+    console.log(oo.nomcomplet);
 })();
- 
+
