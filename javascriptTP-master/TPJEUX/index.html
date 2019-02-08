@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Titre de la page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="script.js"></script>
+    <script >
+        ( function () {
+            "use strict";
+            $(document).ready(function () {
+                let jeux =  $('<div></div>').appendTo('body');
+                let tableJsFictive =[];
+
+                class Tableau {
+                    constructor(element, tab){
+                        let y = tab.length;
+                        let table =  $('<table></table>').attr( 'class','tableDiv').appendTo(element);
+
+                        for (let i = 0; i < y; ++i){
+                            let tempTR =  $('<tr></tr>').attr( 'class','coloneDiv').appendTo(table);
+                            let x = tab[i].length;
+                            tableJsFictive[i]=[];
+                            for (let j = 0; j < x; ++j){
+                                let td = $('<td></td>');
+                                tableJsFictive[i][j]= {'ct':tab[i][j], 'obj': td} ;
+                                td.attr( 'class','ligneDiv').append(tab[i][j]).appendTo(tempTR);
+                            }
+                        }
+                    }
+                }
+
+                for (let clef in sokoban['levels']){
+                    let temp = $('<button></button>').attr( 'id', clef).append(clef).appendTo('body').on("click", function () {
+                            jeux.empty();
+                            let tableau = new Tableau(jeux,sokoban['levels'][clef]['cells']);
+                        }
+                    );
+                }
+
+                $( "body" ).keydown(function() {
+                    console.log(event['key']);
+                    if (event['key'] ==='z'){
+
+                        let pos=[0,0];
+                        let y = tableJsFictive.length;
+                        for (let i = 0; i < y; ++i){
+                            let x = tableJsFictive[i].length;
+                            for (let j = 0; j < x; ++j){
+                                if( tableJsFictive[i][j]['ct']=== '@'){
+                                    pos=[i,j];
+                                }
+                            }
+                        }
+
+                        if(tableJsFictive[pos[0]-1][pos[1]]['ct'] === " "){
+                            tableJsFictive[pos[0]-1][pos[1]]['obj']=tableJsFictive[pos[0]-1][pos[1]]['obj'].empty().append("@");
+                            tableJsFictive[pos[0]][pos[1]]['obj']=tableJsFictive[pos[0]][pos[1]]['obj'].empty().append(" ");
+                            // alert("avance");
+
+                        }
+                    }
+                });
+
+
+            });
+        })();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

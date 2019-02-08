@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Titre de la page</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+        ( function () {
+            "use strict";
+            let cpt = 20;
+            $(document).ready(function () {
+                /* Mon code */
+
+                let oui = function(){
+                    if (cpt > 0 ){
+                        $('h1').fadeOut(100,non);
+                        --cpt;
+                    }
+                };
+                let non = function(){
+                    console.log(cpt);
+                    $('h1').fadeIn(100,oui);
+                };
+                oui();
+            });
+        })();
+
+    </script>
+</head>
+<body>
+<h1>COUCOU</h1>
+
+</body>
+</html>
